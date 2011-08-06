@@ -91,7 +91,7 @@ Notes:
   (4) Since JavaScript doesn't natively support 32-bit floats, whenever a float
   is stored, the source JavaScript number must be rounded.  This module applies
   correct rounding during this process.  Numbers with magnitude greater than or
-  equal to 2**128-2**103 round to either positive or negative Infinity. The
+  equal to 2^128-2^103 round to either positive or negative Infinity. The
   rounding algorithm assumes that JavsScript is using exactly 64 bits of
   floating point precision; 128-bit floating point will result in subtle errors.
 

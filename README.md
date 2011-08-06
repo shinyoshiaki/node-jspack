@@ -1,6 +1,9 @@
-Disclaimer:  The jspack module and documentation are essentially ports of the
-Python struct module and documentation, with such changes as were necessary.
-If any Python people are miffed that I've ripped off their docs, let me know,
+jspack - library to pack primitives to octet arrays
+====================================================
+## Disclaimer
+The jspack module and documentation are essentially ports of the
+Python struct module and documentation, with such changes as were necessary. The port was originaly made by Fair Oaks Labs, Inc. and published at http://code.google.com/p/jspack/
+If any Python people are miffed that their documentation got ripped off, let me know,
 and I'll gladly revise them.
 
 This module performs conversions between JavaScript values and C structs
@@ -10,35 +13,40 @@ compact descriptions of the layout of the C structs and the intended conversion
 to/from JavaScript values.  This can be used to handle binary data stored in
 files, or received from network connections or other sources.
 
+## Install
+    npm install jspack
+
+## Reference
 
 The module defines the following functions:
 
-  Unpack(fmt, a, p)
-    Return an array containing values unpacked from the octet array a,
-  beginning at position p, according to the supplied format string.  If there
-  are more octets in a than required by the format string, the excess is
-  ignored.  If there are fewer octets than required, Unpack() will return
-  undefined.  If no value is supplied for the p argument, zero is assumed.
+### Unpack(fmt, a, p)
+Return an array containing values unpacked from the octet array a,
+beginning at position p, according to the supplied format string.  If there
+are more octets in a than required by the format string, the excess is
+ignored.  If there are fewer octets than required, Unpack() will return
+undefined.  If no value is supplied for the p argument, zero is assumed.
 
-  PackTo(fmt, a, p, values)
-    Pack and store the values array into the supplied octet array a, beginning
-  at position p.  If there are more values supplied than are specified in the
-  format string, the excess is ignored.  If there are fewer values supplied,
-  PackTo() will return false.  If there is insufficient space in a to store
-  the packed values, PackTo() will return false.  On success, PackTo() returns
-  the a argument. If any value is of an inappropriate type, the results are
-  undefined.
+### PackTo(fmt, a, p, values)
+Pack and store the values array into the supplied octet array a, beginning
+at position p.  If there are more values supplied than are specified in the
+format string, the excess is ignored.  If there are fewer values supplied,
+PackTo() will return false.  If there is insufficient space in a to store
+the packed values, PackTo() will return false.  On success, PackTo() returns
+the a argument. If any value is of an inappropriate type, the results are
+undefined.
 
-  Pack(fmt, values)
-    Return an octet array containing the packed values array.  If there are
-  more values supplied than are specified in the format string, the excess is
-  ignored.  If there are fewer values supplied, Pack() will return false.  If
-  any value is of an inappropriate type, the results are undefined.
+### Pack(fmt, values)
+Return an octet array containing the packed values array.  If there are
+more values supplied than are specified in the format string, the excess is
+ignored.  If there are fewer values supplied, Pack() will return false.  If
+any value is of an inappropriate type, the results are undefined.
 
-  CalcLength(fmt)
-    Return the number of octets required to store the given format string.
+### CalcLength(fmt)
+Return the number of octets required to store the given format string.
 
 
+## Formats
 Format characters have the following meanings; the conversion between C and
 JavaScript values should be obvious given their types:
 

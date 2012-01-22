@@ -59,8 +59,8 @@ function JSPack()
 	// ASCII character strings null terminated
 	m._DeNullString = function (a, p, l, v)
 	{
-        	var str = m._DeString(a, p, l, v);
-          	return str.substring(0, str.length - 1);
+		var str = m._DeString(a, p, l, v);
+		return str.substring(0, str.length - 1);
 	};
 
 	// Little-endian N-bit IEEE 754 floating point

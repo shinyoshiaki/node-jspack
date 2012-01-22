@@ -1,5 +1,5 @@
 /*!
- *  Copyright © 2008 Fair Oaks Labs, Inc.
+ *  Copyright ï¿½ 2008 Fair Oaks Labs, Inc.
  *  All rights reserved.
  */
 
@@ -193,7 +193,7 @@ function JSPack()
 			}
 			switch (m[2])
 			{
-			case 'A': case 's': case 'S':
+				case 'A': case 's': case 'S':
 					rv.push(this._elLut[m[2]].de(a, p, n));
 					break;
 				case 'c': case 'b': case 'B': case 'h': case 'H':

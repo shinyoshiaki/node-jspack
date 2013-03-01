@@ -63,10 +63,11 @@ JavaScript values should be obvious given their types:
        I   | unsigned long  | number            |        4       |  (3)
        l   | signed long    | number            |        4       |  (3)
        L   | unsigned long  | number            |        4       |  (3)
+       q   | signed quad    | number            |        8       |  (3)
+       Q   | unsigned quad  | number            |        8       |  (3)
        s   | char[]         | string            |     Length     |  (2)
        f   | float          | number            |        4       |  (4)
        d   | double         | number            |        8       |  (5)
-
 Notes:
 
   (1) The "A" code simply returns a slice of the source octet array.  This is

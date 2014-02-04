@@ -2,7 +2,7 @@
   "author": "https://github.com/pgriess",
   "name": "jspack",
   "description": "JavaScript library to pack primitives to octet arrays, packaged for NodeJS.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "http://github.com/birchroad/node-jspack",
   "repository": {
     "type": "git",

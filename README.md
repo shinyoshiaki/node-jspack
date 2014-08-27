@@ -59,12 +59,12 @@ JavaScript values should be obvious given their types:
        B   | unsigned char  | number            |        1       |  (3)
        h   | signed short   | number            |        2       |  (3)
        H   | unsigned short | number            |        2       |  (3)
-       i   | signed long    | number            |        4       |  (3)
-       I   | unsigned long  | number            |        4       |  (3)
+       i   | signed int     | number            |        4       |  (3)
+       I   | unsigned int   | number            |        4       |  (3)
        l   | signed long    | number            |        4       |  (3)
        L   | unsigned long  | number            |        4       |  (3)
-       q   | signed quad    | number            |        8       |  (3)
-       Q   | unsigned quad  | number            |        8       |  (3)
+       q   | signed long    | number            |        8       |  (6)
+       Q   | unsigned long  | number            |        8       |  (6)
        s   | char[]         | string            |     Length     |  (2)
        f   | float          | number            |        4       |  (4)
        d   | double         | number            |        8       |  (5)
@@ -99,6 +99,12 @@ Notes:
   (5) This module assumes that JavaScript is using 64 bits of floating point
   precision, so the "d" code performs no rounding.  128-bit floating point will
   cause the "d" code to simply truncate significands to 52 bits.
+
+  (6) Since 64bit "longs" cannot be represented in JavaScript, this version of
+  jspack will accept and return 2 part arrays for "longs": ```[highBits, lowBits]```
+  , always in big-endian.
+  These can be used for example with Long.js ([https://github.com/dcodeIO/Long.js]).
+  See [test/int64.js] for examples.
 
 A format character may be preceded by an integral repeat count.  For example,
 the format string "4h" means exactly the same thing as "hhhh".

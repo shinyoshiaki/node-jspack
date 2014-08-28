@@ -4,20 +4,20 @@ var Long = require('long');
 
 describe('Test long integration (examples):', function() {
 
-	// Demonstrating the use together with Long.js (https://github.com/dcodeIO/Long.js)
-	//
-	// Because jspack doesn't care about signedness, we have to tell Long.js what we want our selfs.
-	// Taking care of signedness in jspack would mean to introduce a dependency on something like
-	// Long.js.
-	//
-	// Test number u            228290380562207 (BE: 0x00, 0x00, 0xcf, 0xa0, 0xff, 0x09, 0xff, 0x1f)
-	//                                          (LE: 0x1f, 0xff, 0x09, 0xff, 0xa0, 0xcf, 0x00, 0x00)
-	// Test number s           -228290380562207 (BE: 0xff, 0xff, 0x30, 0x5f, 0x00, 0xf6, 0x00, 0xe1)
-	//                                          (LE: 0xe1, 0x00, 0xf6, 0x00, 0x5f, 0x30, 0xff, 0xff)
+    // Demonstrating the use together with Long.js (https://github.com/dcodeIO/Long.js)
+    //
+    // Because jspack doesn't care about signedness, we have to tell Long.js what we want our selfs.
+    // Taking care of signedness in jspack would mean to introduce a dependency on something like
+    // Long.js.
+    //
+    // Test number u            228290380562207 (BE: 0x00, 0x00, 0xcf, 0xa0, 0xff, 0x09, 0xff, 0x1f)
+    //                                          (LE: 0x1f, 0xff, 0x09, 0xff, 0xa0, 0xcf, 0x00, 0x00)
+    // Test number s           -228290380562207 (BE: 0xff, 0xff, 0x30, 0x5f, 0x00, 0xf6, 0x00, 0xe1)
+    //                                          (LE: 0xe1, 0x00, 0xf6, 0x00, 0x5f, 0x30, 0xff, 0xff)
 
-	it('pack <Q', function() {
-		//var num = new Long(0xff09ff1f, 0x0000cfa0, true);
-		var num = Long.fromNumber(228290380562207, true);
+    it('pack <Q', function() {
+        //var num = new Long(0xff09ff1f, 0x0000cfa0, true);
+        var num = Long.fromNumber(228290380562207, true);
 
         // Pass long representation to jspack
         var buf = jspack.Pack('<Q', [[num.getLowBitsUnsigned(), num.getHighBitsUnsigned()]]);
@@ -26,7 +26,7 @@ describe('Test long integration (examples):', function() {
     });
 
     it('unpack <Q', function() {
-    	var testNum = new Long(0xff09ff1f, 0x0000cfa0, true); // unsigned
+        var testNum = new Long(0xff09ff1f, 0x0000cfa0, true); // unsigned
         var buf = jspack.Unpack('<Q', [0x1f, 0xff, 0x09, 0xff, 0xa0, 0xcf, 0x00, 0x00]);
         buf.length.should.be.eql(1);
         buf[0].length.should.be.eql(3);
@@ -41,8 +41,8 @@ describe('Test long integration (examples):', function() {
     });
 
     it('pack <q', function() {
-		//var num = new Long(0x00f600e1, 0xffff305f, true);
-		var num = Long.fromNumber(-228290380562207); // signed
+        //var num = new Long(0x00f600e1, 0xffff305f, true);
+        var num = Long.fromNumber(-228290380562207); // signed
 
         // Pass long representation to jspack
         var buf = jspack.Pack('<q', [[num.getLowBitsUnsigned(), num.getHighBitsUnsigned()]]);
@@ -51,7 +51,7 @@ describe('Test long integration (examples):', function() {
     });
 
     it('unpack <q', function() {
-    	var testNum = new Long(0x00f600e1, 0xffff305f); // signed
+        var testNum = new Long(0x00f600e1, 0xffff305f); // signed
         var buf = jspack.Unpack('<q', [0xe1, 0x00, 0xf6, 0x00, 0x5f, 0x30, 0xff, 0xff]);
         buf.length.should.be.eql(1);
         buf[0].length.should.be.eql(3);
@@ -71,9 +71,9 @@ describe('Test signed/unsigned int64:', function() {
 
     // Number 0xffa0ffe1ffff, packed with Python struct:
     // little endian:
-	// 0xff, 0xff, 0xe1, 0xff, 0xa0, 0xff, 0x00, 0x00
-	// big endian:
-	// 0x00, 0x00, 0xff, 0xa0, 0xff, 0xe1, 0xff, 0xff
+    // 0xff, 0xff, 0xe1, 0xff, 0xa0, 0xff, 0x00, 0x00
+    // big endian:
+    // 0x00, 0x00, 0xff, 0xa0, 0xff, 0xe1, 0xff, 0xff
 
     it('pack <Q', function() {
         var buf = jspack.Pack('<Q', [[0xffe1ffff, 0xffa0]]);

@@ -1,5 +1,8 @@
 jspack - library to pack primitives to octet arrays
 ====================================================
+
+!(Build status)[https://travis-ci.org/AndreasAntener/node-jspack.svg?branch=master]
+
 ## Disclaimer
 The jspack module and documentation are essentially ports of the
 Python struct module and documentation, with such changes as were necessary. The port was originaly made by Fair Oaks Labs, Inc. and published at http://code.google.com/p/jspack/

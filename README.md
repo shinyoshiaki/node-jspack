@@ -71,14 +71,15 @@ JavaScript values should be obvious given their types:
        s   | char[]         | string            |     Length     |  (2)
        f   | float          | number            |        4       |  (4)
        d   | double         | number            |        8       |  (5)
-Notes:
 
-  (1) The "A" code simply returns a slice of the source octet array.  This is
+*Notes:*
+
+  **(1)** The "A" code simply returns a slice of the source octet array.  This is
   primarily useful when a data structure contains bytes which are subject to
   multiple intepretations (e.g. unions), and the data structure is being
   decoded in multiple passes.
 
-  (2) The "c" and "s" codes handle strings with codepoints between 0 and 255,
+  **(2)** The "c" and "s" codes handle strings with codepoints between 0 and 255,
   inclusive.  The data are not bounds-checked, so strings containing  characters
   with codepoints outside this range will encode to "octet" arrays that contain
   values outside the range of an octet.  Furthermore, since these codes decode
@@ -86,28 +87,30 @@ Notes:
   not "correctly" decode bytes in the range 128-255, since that range is subject
   to multiple interpretations.  Caveat coder!
 
-  (3) The 8 "integer" codes clip their encoded values to the minima and maxmima
+  **(3)** The 8 "integer" codes clip their encoded values to the minima and maxmima
   of their respective types:  If you invoke Struct.Pack('b', [-129]), for
   instance, the result will be [128], which is the octet encoding of -128,
   which is the minima of a signed char.  Similarly, Struct.Pack('h', [-32769])
   returns [128, 0].  Fractions are truncated.
 
-  (4) Since JavaScript doesn't natively support 32-bit floats, whenever a float
+  **(4)** Since JavaScript doesn't natively support 32-bit floats, whenever a float
   is stored, the source JavaScript number must be rounded.  This module applies
   correct rounding during this process.  Numbers with magnitude greater than or
   equal to 2^128-2^103 round to either positive or negative Infinity. The
   rounding algorithm assumes that JavsScript is using exactly 64 bits of
   floating point precision; 128-bit floating point will result in subtle errors.
 
-  (5) This module assumes that JavaScript is using 64 bits of floating point
+  **(5)** This module assumes that JavaScript is using 64 bits of floating point
   precision, so the "d" code performs no rounding.  128-bit floating point will
   cause the "d" code to simply truncate significands to 52 bits.
 
-  (6) Since 64bit "longs" cannot be represented in JavaScript, this version of
-  jspack will accept and return 2 part arrays for "longs": ```[highBits, lowBits]```
-  , always in big-endian.
-  These can be used for example with [Long.js](https://github.com/dcodeIO/Long.js).
-  See [test/int64.js] for examples.
+  **(6)** Since 64bit longs cannot be represented by numbers JavaScript, this version of
+  jspack will process longs as arrays in the form: ```[lowBits, hightBits]```. The
+  decoded long array contains a third element, the unsigned flag, which is ```false``` for signed
+  and ```true``` for unsigned values.
+  This representation is similar to what [Long.js](https://github.com/dcodeIO/Long.js), and
+  therefore the [Google Closure Libaray](https://github.com/google/closure-library), uses.
+  See [test/int64.js](test/int64.js) for examples how to work with Long.js.
 
 A format character may be preceded by an integral repeat count.  For example,
 the format string "4h" means exactly the same thing as "hhhh".

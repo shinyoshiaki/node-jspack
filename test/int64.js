@@ -6,9 +6,10 @@ describe('Test long integration (examples):', function() {
 
     // Demonstrating the use together with Long.js (https://github.com/dcodeIO/Long.js)
     //
-    // Because jspack doesn't care about signedness, we have to tell Long.js what we want our selfs.
-    // Taking care of signedness in jspack would mean to introduce a dependency on something like
-    // Long.js.
+    // Packing a long requires the input of a 2 part array containing the [low, high] bits
+    // of the specific long value.
+    // Unpacking a long results in a 3 part array containing [low, high, unsigned] bits and flag.
+    // The decoded value can be applied directly to Long.fromBits()
     //
     // Test number u            228290380562207 (BE: 0x00, 0x00, 0xcf, 0xa0, 0xff, 0x09, 0xff, 0x1f)
     //                                          (LE: 0x1f, 0xff, 0x09, 0xff, 0xa0, 0xcf, 0x00, 0x00)

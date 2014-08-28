@@ -103,7 +103,7 @@ Notes:
   (6) Since 64bit "longs" cannot be represented in JavaScript, this version of
   jspack will accept and return 2 part arrays for "longs": ```[highBits, lowBits]```
   , always in big-endian.
-  These can be used for example with Long.js [Long.js](https://github.com/dcodeIO/Long.js).
+  These can be used for example with [Long.js](https://github.com/dcodeIO/Long.js).
   See [test/int64.js] for examples.
 
 A format character may be preceded by an integral repeat count.  For example,

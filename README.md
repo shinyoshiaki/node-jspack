@@ -1,7 +1,7 @@
 jspack - library to pack primitives to octet arrays
 ====================================================
 
-[![Build status](https://travis-ci.org/AndreasAntener/node-jspack.svg?branch=master)](https://travis-ci.org/AndreasAntener/node-jspack)
+[![Build status](https://travis-ci.org/birchroad/node-jspack.svg?branch=master)](https://travis-ci.org/birchroad/node-jspack)
 
 ## Disclaimer
 The jspack module and documentation are essentially ports of the

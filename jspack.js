@@ -130,6 +130,22 @@ function JSPack()
 		a[p+i-d] |= s*128;
 	};
 
+	// Convert int64 to array with 3 elements: [lowBits, highBits, unsignedFlag]
+	// '>>>' trick to convert signed 32bit int to unsigned int (because << always results in a signed 32bit int)
+	m._DeInt64 = function (a, p) {
+		var start = bBE ? 0 : 7, nsb = bBE ? 1 : -1, stop = start + nsb * 8, rv = [0,0, !el.bSigned], i, f, rvi;
+		for (i = start, rvi = 1, f = 0;
+			i != stop;
+			rv[rvi] = (((rv[rvi]<<8)>>>0) + a[p + i]), i += nsb, f++, rvi = (f < 4 ? 1 : 0));
+		return rv;
+	};
+	m._EnInt64 = function (a, p, v) {
+		var start = bBE ? 0 : 7, nsb = bBE ? 1 : -1, stop = start + nsb * 8, i, f, rvi, s;
+		for (i = start, rvi = 1, f = 0, s = 24;
+			i != stop;
+			a[p + i] = v[rvi]>>s & 0xff, i += nsb, f++, rvi = (f < 4 ? 1 : 0), s = 24 - (8 * (f % 4)));
+	};
+	
 
 	// Class data
 	m._sPattern	= '(\\d+)?([AxcbBhHsfdiIlLqQ])';
@@ -147,8 +163,8 @@ function JSPack()
 				'L': {en:m._EnInt, de:m._DeInt, len:4, bSigned:false, min:0, max:Math.pow(2, 32)-1},
 				'f': {en:m._En754, de:m._De754, len:4, mLen:23, rt:Math.pow(2, -24)-Math.pow(2, -77)},
 				'd': {en:m._En754, de:m._De754, len:8, mLen:52, rt:0},
-				'q': {en:m._EnInt, de:m._DeInt, len:8, bSigned:true, min:-Math.pow(2, 63), max:Math.pow(2, 63)-1},
-				'Q': {en:m._EnInt, de:m._DeInt, len:8, bSigned:false, min:0, max:Math.pow(2, 64)-1}};
+				'q': {en:m._EnInt64, de:m._DeInt64, bSigned:true},
+				'Q': {en:m._EnInt64, de:m._DeInt64, bSigned:false}};
 
 	// Unpack a series of n elements of size s from array a at offset p with fxn
 	m._UnpackSeries = function (n, s, a, p)
@@ -218,7 +234,7 @@ function JSPack()
 					i += 1;
 					break;
 				case 'c': case 'b': case 'B': case 'h': case 'H':
-				case 'i': case 'I': case 'l': case 'L': case 'f': case 'd':
+				case 'i': case 'I': case 'l': case 'L': case 'f': case 'd': case 'q': case 'Q':
 					el = this._elLut[m[2]];
 					if ((i + n) > values.length) { return false; }
 					this._PackSeries(n, s, a, p, values, i);

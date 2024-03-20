@@ -2,7 +2,7 @@
   "author": "https://github.com/pgriess",
   "name": "@shinyoshiaki/jspack",
   "description": "JavaScript library to pack primitives to octet arrays, including int64 support, packaged for NodeJS.",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "homepage": "https://github.com/birchroad/node-jspack",
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 {
   "author": "https://github.com/pgriess",
-  "name": "jspack",
+  "name": "@shinyoshiaki/jspack",
   "description": "JavaScript library to pack primitives to octet arrays, including int64 support, packaged for NodeJS.",
   "version": "0.0.4",
   "homepage": "https://github.com/birchroad/node-jspack",
@@ -9,6 +9,7 @@
     "url": "git://github.com/birchroad/node-jspack.git"
   },
   "main": "./jspack.js",
+  "types": "./jspack.d.ts",
   "maintainers": [
     {
       "name": "Peter Magnusson",
@@ -31,5 +32,8 @@
     "pretest": "npm install",
     "test": "mocha test",
     "lint": "jscs jspack.js ./test/"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
